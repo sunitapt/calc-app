@@ -1,12 +1,14 @@
 import displayTodoist from './components/apps/todoist';
 import displaySpotify from './components/apps/spotify';
 import displayVsCode from './components/apps/vscode';
+
 import { displayTerminal } from './components/apps/terminal';
 import { displaySettings } from './components/apps/settings';
 import { displayChrome } from './components/apps/chrome';
 import { displayTrash } from './components/apps/trash';
 import { displayGedit } from './components/apps/gedit';
 import { displayAboutVivek } from './components/apps/vivek';
+import { displayTerminalCalc } from './components/apps/calc';
 
 const apps = [
     {
@@ -26,6 +28,15 @@ const apps = [
         favourite: true,
         desktop_shortcut: false,
         screen: displayTodoist,
+    },
+    {
+        id: "calc",
+        title: "Calc",
+        icon: './themes/Yaru/apps/calc14.png',
+        disabled: false,
+        favourite: true,
+        desktop_shortcut: false,
+        screen: displayTerminalCalc,
     },
     {
         id: "about-vivek",

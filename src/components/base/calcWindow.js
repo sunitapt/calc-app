@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Draggable from 'react-draggable';
 import Settings from '../apps/settings';
 import ReactGA from 'react-ga';
-import { displayTerminal } from '../apps/terminal'
+import { displayTerminalCalc } from '../apps/calc';
+
 export class Window extends Component {
     constructor() {
         super();
@@ -177,12 +178,12 @@ export class Window extends Component {
                 >
                     <WindowYBorder resize={this.handleHorizontalResize} />
                     <WindowXBorder resize={this.handleVerticleResize} />
-                    <WindowTopBar title={this.props.title} />
+                    <WindowTopBar title={this.props.title}  />
                     <WindowEditButtons minimize={this.minimizeWindow} maximize={this.maximizeWindow} isMaximised={this.state.maximized} close={this.closeWindow} id={this.id} />
                     {(this.id === "settings"
                         ? <Settings changeBackgroundImage={this.props.changeBackgroundImage} currBgImgName={this.props.bg_image_name} />
                         : <WindowMainScreen screen={this.props.screen} title={this.props.title}
-                            addFolder={this.props.id === "terminal" ? this.props.addFolder : null}
+                            addFolder={this.props.id === "calc" ? this.props.addFolder : null}
                             openApp={this.props.openApp} />)}
                 </div>
             </Draggable >
@@ -196,7 +197,7 @@ export default Window
 export function WindowTopBar(props) {
     return (
         <div className={" relative bg-ub-window-title border-t-2 border-white border-opacity-5 py-1.5 px-3 text-white w-full select-none rounded-b-none"}>
-            <div className="flex justify-center text-sm font-bold">{props.title}</div>
+            <div className="flex justify-center text-sm font-bold">{props.title }</div>
         </div>
     )
 }
@@ -288,7 +289,7 @@ export class WindowMainScreen extends Component {
     render() {
         return (
             <div className={"w-full flex-grow z-20 max-h-full overflow-y-auto windowMainScreen" + (this.state.setDarkBg ? " bg-ub-drk-abrgn " : " bg-ub-cool-grey")}>
-                {this.props.addFolder ? displayTerminal(this.props.addFolder, this.props.openApp) : this.props.screen()}
+                {this.props.addFolder ? displayTerminalCalc(this.props.addFolder, this.props.openApp) : this.props.screen()}
             </div>
         )
     }

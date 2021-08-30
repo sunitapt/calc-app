@@ -3,6 +3,8 @@ import BackgroundImage from '../util components/background-image';
 import SideBar from './side_bar';
 import apps from '../../apps.config';
 import Window from '../base/window';
+import calcWindow from '../base/calcWindow';
+
 import UbuntuApp from '../base/ubuntu_app';
 import AllApplications from '../screen/all-applications'
 import DesktopMenu from '../context menus/desktop-menu';
@@ -114,6 +116,9 @@ export class Desktop extends Component {
         if (posx + $(contextMenu).width() > window.innerWidth) posx -= $(contextMenu).width();
         if (posy + $(contextMenu).height() > window.innerHeight) posy -= $(contextMenu).height();
 
+        if (posx + $(contextMenu).width() > calcWindow.innerWidth) posx -= $(contextMenu).width();
+        if (posy + $(contextMenu).height() > calcWindow.innerHeight) posy -= $(contextMenu).height();
+
         posx = posx.toString() + "px";
         posy = posy.toString() + "px";
 
@@ -136,6 +141,7 @@ export class Desktop extends Component {
         var posy = 0;
 
         if (!e) e = window.event;
+        if (!e) e = calcWindow.event;
 
         if (e.pageX || e.pageY) {
             posx = e.pageX;
@@ -237,7 +243,7 @@ export class Desktop extends Component {
             if (this.state.desktop_apps.includes(app.id)) {
 
                 const props = {
-                    name: app.title,
+                    name: app.title.slice(0, 10) + (app.title.length > 10 ? "..." : ""),
                     id: app.id,
                     icon: app.icon,
                     openApp: this.openApp
